@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart Queue - Book Appointment</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Smart Queue & Appointment System</h1>
+        <p>Book your appointment and skip long waiting lines.</p>
+    </header>
+
+    <section class="card">
+        <h2>Book Appointment</h2>
+        <form id="bookingForm">
+            <label>
+                Name
+                <input type="text" name="name" id="name" required>
+            </label>
+            <label>
+                Phone
+                <input type="tel" name="phone" id="phone" required>
+            </label>
+            <button type="submit">Book Now</button>
+        </form>
+        <div id="bookingResult" class="result"></div>
+    </section>
+
+    <section class="card">
+        <h2>Current Queue</h2>
+        <p id="currentServing">Loading current serving token...</p>
+        <table id="queueTable">
+            <thead>
+                <tr>
+                    <th>Token</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="queueBody">
+            </tbody>
+        </table>
+    </section>
+
+    <footer>
+        <p>Admin? <a href="admin.html">Go to Admin Panel</a></p>
+    </footer>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
+
