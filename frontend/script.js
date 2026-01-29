@@ -1,5 +1,5 @@
 // Set this to your backend Render URL, e.g. "https://smart-queue-backend.onrender.com"
-const API_BASE_URL = "https://YOUR-BACKEND-URL";
+const API_BASE_URL = "https://new-smartqueuemanagement.onrender.com";
 
 document.addEventListener("DOMContentLoaded", () => {
     const bookingForm = document.getElementById("bookingForm");
@@ -147,4 +147,5 @@ async function updateStatus(id, action) {
         alert("Error updating status.");
     }
 }
+
 
