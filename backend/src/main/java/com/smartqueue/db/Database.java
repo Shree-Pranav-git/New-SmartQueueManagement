@@ -26,8 +26,13 @@ public class Database {
             throw new SQLException("Database environment variables not set");
         }
 
+        // DEBUG LOGS (temporary)
+        System.out.println("DB_HOST = " + HOST);
+        System.out.println("DB_PORT = " + PORT);
+        System.out.println("DB_NAME = " + NAME);
+        System.out.println("DB_USER = " + USER);
+
         String url = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + NAME + "?sslmode=require";
         return DriverManager.getConnection(url, USER, PASSWORD);
     }
 }
-
