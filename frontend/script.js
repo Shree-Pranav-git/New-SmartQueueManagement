@@ -2,6 +2,63 @@
 const API_BASE_URL = "https://new-smartqueuemanagement.onrender.com";
 
 document.addEventListener("DOMContentLoaded", () => {
+    // Custom Cursor Logic
+    const cursor = document.querySelector('.cursor');
+    const follower = document.querySelector('.cursor-follower');
+    
+    if (cursor && follower) {
+        let mouseX = 0, mouseY = 0;
+        let followerX = 0, followerY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            // Immediate cursor update
+            cursor.style.left = `${mouseX}px`;
+            cursor.style.top = `${mouseY}px`;
+        });
+
+        // Smooth follower animation
+        function animateFollower() {
+            followerX += (mouseX - followerX) * 0.15;
+            followerY += (mouseY - followerY) * 0.15;
+            
+            follower.style.left = `${followerX}px`;
+            follower.style.top = `${followerY}px`;
+            
+            requestAnimationFrame(animateFollower);
+        }
+        animateFollower();
+
+        // Hover effects for interactive elements
+        const interactiveElements = document.querySelectorAll('a, button, input');
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+        });
+        
+        // Ensure new dynamic elements get the hover effect
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach(mutation => {
+                mutation.addedNodes.forEach(node => {
+                    if (node.nodeType === 1) { // Element node
+                        if (node.matches('a, button, input')) {
+                            node.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+                            node.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+                        }
+                        const children = node.querySelectorAll('a, button, input');
+                        children.forEach(child => {
+                            child.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+                            child.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+                        });
+                    }
+                });
+            });
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+    }
+
     const bookingForm = document.getElementById("bookingForm");
     if (bookingForm) {
         bookingForm.addEventListener("submit", handleBookingSubmit);
@@ -147,5 +204,4 @@ async function updateStatus(id, action) {
         alert("Error updating status.");
     }
 }
-
 
